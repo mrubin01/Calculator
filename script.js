@@ -12,6 +12,7 @@ labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
     button.textContent = label;
+    button.style.aspectRatio = "1/1";
     container.appendChild(button);
 })
 
