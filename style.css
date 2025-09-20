@@ -11,3 +11,19 @@ body {
   margin: 20px auto;
 }
 
+.reset {
+  font-size: 18px;
+  padding: 10px 20px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ffdddd;
+  transition: background 0.2s;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
