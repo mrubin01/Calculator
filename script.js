@@ -7,12 +7,24 @@ const labels = [
 ];
 
 const container = document.getElementById("buttonContainer");
+const display = document.getElementById("displayField");
+const reset = document.getElementById("resetButton");
+
 
 labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
     button.textContent = label;
     button.style.aspectRatio = "1/1";
+
+    // listener: to be implemented
+    button.addEventListener("click", () => {
+        if (label === "=") {
+            console.log("placeholder");
+        } else {
+            console.log("placeholder");
+        }
+    })
     container.appendChild(button);
 })
 
