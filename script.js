@@ -7,8 +7,8 @@ const labels = [
 ];
 
 const container = document.getElementById("buttonContainer");
-const display = document.getElementById("displayField");
-const reset = document.getElementById("resetButton");
+const displayF = document.getElementById("displayField");
+const resetB = document.getElementById("resetButton");
 
 
 labels.forEach(label => {
@@ -20,9 +20,15 @@ labels.forEach(label => {
     // listener: to be implemented
     button.addEventListener("click", () => {
         if (label === "=") {
-            console.log("placeholder");
+            try {
+                displayF.value = math.evaluate(displayF); 
+            } catch {
+                displayF.value = "Error"; 
+            }
+        } else if (["+", "-", "*", "/"].includes(label)) {
+            displayF.value += ` ${label} `; 
         } else {
-            console.log("placeholder");
+            displayF.value += label; 
         }
     })
     container.appendChild(button);
@@ -55,3 +61,7 @@ function operate(n1, n2, operator) {
         divide(n1, n2);
     }
 }
+
+resetBtn.addEventListener("click", () => {
+  resultField.value = "";
+});
