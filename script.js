@@ -44,10 +44,12 @@ labels.forEach(label => {
             displayField.value = evaluateInput(displayField.value);
             evaluateFlag = true;
         } else if (["+", "-", "*", "/"].includes(label)) {
-            displayField.value += ` ${label} `; 
+            displayField.value += ` ${label} `;
+            evaluateFlag = false;
         } else {
             if (evaluateFlag) {
                 displayField.value = label;
+                evaluateFlag = false;
             } else {
                 displayField.value = label;
             }
