@@ -10,9 +10,9 @@ const container = document.getElementById("buttonContainer");
 const displayF = document.getElementById("displayField");
 const resetB = document.getElementById("resetButton");
 
-// add listener for the display
-displayF.addEventListener("click", () => {
-    displayF.textContent = "";
+// add listener for the reset button
+resetB.addEventListener("click", () => {
+    resetB.textContent = "";
 })
 
 labels.forEach(label => {
