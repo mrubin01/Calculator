@@ -60,13 +60,13 @@ function divide(n1, n2) {
 
 function operate(n1, n2, operator) {
     if (operator === "+") {
-        add(n1, n2); 
+        return add(n1, n2); 
     } else if (operator === "-") {
-        subtract(n1, n2);
+        return subtract(n1, n2);
     } else if (operator === "*") {
-        multiply(n1, n2);
+        return multiply(n1, n2);
     } else if (operator === "/") {
-        divide(n1, n2);
+        return divide(n1, n2);
     }
 }
 
