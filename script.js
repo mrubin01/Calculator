@@ -12,7 +12,7 @@ const resetB = document.getElementById("resetButton");
 
 // add listener for the reset button
 resetB.addEventListener("click", () => {
-    resetB.textContent = "";
+    displayF.textContent = "";
 })
 
 labels.forEach(label => {
