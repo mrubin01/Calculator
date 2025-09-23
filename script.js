@@ -45,33 +45,39 @@ labels.forEach(label => {
     button.addEventListener("click", () => {
         if (label === "=") {
             const value = evaluateInput(displayField.value);
-            displayField.value = value === "" ? "" : String(value); 
-            lastAction = "equals";
-        } 
+            displayField.value = value === "" ? "" : String(value);
+            lastAction = 'equals';
+            return;
+      }
 
-        if (["+", "-", "*", "/"].includes(label)) {
-            if (lastAction === 'operator') {
-                displayField.value = displayField.value.slice(0, -3) + ` ${label} `;
-            } else if (lastAction === 'equals' || lastAction === 'digit' || lastAction === null) {
-                if (displayField.value.trim() !== "") {
-                    displayField.value = `${displayField.value} ${label} `;
-                }
-            }
-            lastAction = "operator"; 
-            return; 
+      if (["+", "-", "*", "/"].includes(label)) {
+        // If user clicks operator repeatedly, replace the previous operator
+        if (lastAction === 'operator') {
+          // remove last " <op> " (3 chars) and add the new one
+          displayField.value = displayField.value.slice(0, -3) + ` ${label} `;
+        } else if (lastAction === 'equals' || lastAction === 'digit' || lastAction === null) {
+          // If last was equals, we want to continue from the result; just append operator
+          // (If resultField is empty and operator is pressed, do nothing)
+          if (displayField.value.trim() !== "") {
+            displayField.value = `${displayField.value} ${label} `;
+          }
         }
+        lastAction = 'operator';
+        return;
+      }
 
-        if (lastAction === "equals") {
-            displayField.value = label;
-        } else {
-            displayField.value += label; 
-        }
-        lastAction = "digit";
+      // If last action was 'equals' and user didn't press an operator in between,
+      // start a fresh number (replace the displayed result).
+      if (lastAction === 'equals') {
+        displayField.value = label; // start new number
+      } else {
+        displayField.value += label; // continue current entry
+      }
+      lastAction = 'digit';
     });
 
-
     container.appendChild(button);
-})
+  });
 
 function add(n1, n2) {
     return n1 + n2;
