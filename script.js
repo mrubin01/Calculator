@@ -90,7 +90,17 @@ labels.forEach(label => {
         } else {
             displayField.value = value.slice(0, -1); 
         }
-        return;
+
+        // update lastAction
+        const trimmed = displayField.value.trim();
+        if (trimmed === "") {
+            lastAction = null;
+        } else if (/[+\-*/]$/.test(trimmed)) {
+            lastAction = "operator";
+        } else {
+            lastAction = "digit"; 
+        }
+        return; 
       }
 
       // If last action was 'equals' and user didn't press an operator in between,
