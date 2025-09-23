@@ -58,6 +58,7 @@ labels.forEach(label => {
             return;
       }
 
+      // operators
       if (["+", "-", "*", "/"].includes(label)) {
         // If user clicks operator repeatedly, replace the previous operator
         if (lastAction === 'operator') {
@@ -74,10 +75,22 @@ labels.forEach(label => {
         return;
       }
 
+      // dot
       if (label === ".") {
         const parts = displayField.value.trim().split(/\s+/);
         const currentNumber = parts[parts.length - 1] || "";
         if (currentNumber.includes(".")) return;
+      }
+
+      // backspace
+      if (label === "C") {
+        const value = displayField.value; 
+        if (value.endsWith(" ")) {
+            displayField.value = value.slice(0, -3); 
+        } else {
+            displayField.value = value.slice(0, -1); 
+        }
+        return;
       }
 
       // If last action was 'equals' and user didn't press an operator in between,
