@@ -35,7 +35,7 @@ function evaluateInput(input) {
         if (result === "Error") return "Error"; 
     }
 
-    return result; 
+    return roundResult(result); 
 }
 
 // track last action
@@ -71,6 +71,12 @@ labels.forEach(label => {
         }
         lastAction = 'operator';
         return;
+      }
+
+      if (label === ".") {
+        const parts = displayField.value.trim().split(/\s+/);
+        const currentNumber = parts[parts.length - 1] || "";
+        if (currentNumber.includes(".")) return;
       }
 
       // If last action was 'equals' and user didn't press an operator in between,
@@ -117,4 +123,5 @@ function operate(n1, n2, operator) {
 // listener for the reset button
 resetButton.addEventListener("click", () => {
   displayField.value = "";
+  lastAction = null;
 });
