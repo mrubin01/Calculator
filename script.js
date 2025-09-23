@@ -7,8 +7,8 @@ const labels = [
 ];
 
 const container = document.getElementById("buttonContainer");
-const displayF = document.getElementById("displayF");
-const resetB = document.getElementById("resetB");
+const displayField = document.getElementById("displayField");
+const resetButton = document.getElementById("resetButton");
 
 labels.forEach(label => {
     const button = document.createElement("button");
@@ -20,14 +20,14 @@ labels.forEach(label => {
     button.addEventListener("click", () => {
         if (label === "=") {
             try {
-                displayF.value = math.evaluate(displayF); 
+                displayField.value = math.evaluate(displayField); 
             } catch {
-                displayF.value = "Error"; 
+                displayField.value = "Error"; 
             }
         } else if (["+", "-", "*", "/"].includes(label)) {
-            displayF.value += ` ${label} `; 
+            displayField.value += ` ${label} `; 
         } else {
-            displayF.value += label; 
+            displayField.value += label; 
         }
     })
     container.appendChild(button);
@@ -62,6 +62,6 @@ function operate(n1, n2, operator) {
 }
 
 // add listener for the reset button
-resetBtn.addEventListener("click", () => {
+resetButton.addEventListener("click", () => {
   resultField.value = "";
 });
