@@ -30,6 +30,8 @@ function evaluateInput(input) {
     return result; 
 }
 
+let evaluateFlag = false;
+
 labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
@@ -40,10 +42,15 @@ labels.forEach(label => {
     button.addEventListener("click", () => {
         if (label === "=") {
             displayField.value = evaluateInput(displayField.value);
+            evaluateFlag = true;
         } else if (["+", "-", "*", "/"].includes(label)) {
             displayField.value += ` ${label} `; 
         } else {
-            displayField.value += label; 
+            if (evaluateFlag) {
+                displayField.value = label;
+            } else {
+                displayField.value = label;
+            }
         }
     })
     container.appendChild(button);
