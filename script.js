@@ -7,18 +7,8 @@ const labels = [
 ];
 
 const container = document.getElementById("buttonContainer");
-const displayF = document.getElementById("displayField");
-const resetB = document.getElementById("resetButton");
-
-  // Debug guard: ensure required elements exist
-  if (!container || !displayF || !resetB) {
-    console.error('Missing required DOM elements:', {
-      containerExists: !!container,
-      displayFExists: !!displayF,
-      resetBExists: !!resetB
-    });
-    return;
-  }
+const displayF = document.getElementById("displayF");
+const resetB = document.getElementById("resetB");
 
 labels.forEach(label => {
     const button = document.createElement("button");
