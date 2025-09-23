@@ -3,7 +3,7 @@ const labels = [
     "4", "5", "6",
     "7", "8", "9",
     "0", "=", "+",
-    "-", "*", "/"
+    "-", "*", "/", "."
 ];
 
 const container = document.getElementById("buttonContainer");
@@ -35,6 +35,7 @@ function evaluateInput(input) {
 // track last action
 let lastAction = null;
 
+// add digit numbers
 labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
