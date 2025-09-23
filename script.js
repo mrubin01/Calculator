@@ -14,13 +14,15 @@ const resetButton = document.getElementById("resetButton");
 function evaluateInput(input) {
     const tokens = input.trim().split(/\s+/);
 
-    if (tokens.length < 3) return input;
+    if (tokens.length === 0) return "";
+    if (tokens.length === 1) return Number(tokens[0]);
 
     let result = Number(tokens[0]);
 
     for (let i = 1; i < tokens.length; i += 2) {
         const operator = tokens[i];
-        const nextNumber = Number(tokens[i + i]);
+        const nextToken = tokens[i + 1];
+        const nextNumber = nextToken !== undefined ? Number(nextToken) : 0;
 
         result = operate(result, nextNumber, operator); 
 
@@ -30,7 +32,8 @@ function evaluateInput(input) {
     return result; 
 }
 
-let evaluateFlag = false;
+// track last action
+let lastAction = null;
 
 labels.forEach(label => {
     const button = document.createElement("button");
@@ -41,20 +44,32 @@ labels.forEach(label => {
     // button listener
     button.addEventListener("click", () => {
         if (label === "=") {
-            displayField.value = evaluateInput(displayField.value);
-            evaluateFlag = true;
-        } else if (["+", "-", "*", "/"].includes(label)) {
-            displayField.value += ` ${label} `;
-            evaluateFlag = false;
-        } else {
-            if (evaluateFlag) {
-                displayField.value = label;
-                evaluateFlag = false;
-            } else {
-                displayField.value = label;
+            const value = evaluateInput(displayField.value);
+            displayField.value = value === "" ? "" : String(value); 
+            lastAction = "equals";
+        } 
+
+        if (["+", "-", "*", "/"].includes(label)) {
+            if (lastAction === 'operator') {
+                displayField.value = displayField.value.slice(0, -3) + ` ${label} `;
+            } else if (lastAction === 'equals' || lastAction === 'digit' || lastAction === null) {
+                if (displayField.value.trim() !== "") {
+                    displayField.value = `${displayField.value} ${label} `;
+                }
             }
+            lastAction = "operator"; 
+            return; 
         }
-    })
+
+        if (lastAction === "equals") {
+            displayField.value = label;
+        } else {
+            displayField.value += label; 
+        }
+        lastAction = "digit";
+    });
+
+
     container.appendChild(button);
 })
 
