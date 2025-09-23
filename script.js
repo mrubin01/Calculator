@@ -10,6 +10,10 @@ const container = document.getElementById("buttonContainer");
 const displayF = document.getElementById("displayField");
 const resetB = document.getElementById("resetButton");
 
+// add listener for the display
+displayF.addEventListener("click", () => {
+    displayF.textContent = "";
+})
 
 labels.forEach(label => {
     const button = document.createElement("button");
