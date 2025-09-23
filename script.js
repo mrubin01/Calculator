@@ -10,6 +10,26 @@ const container = document.getElementById("buttonContainer");
 const displayField = document.getElementById("displayField");
 const resetButton = document.getElementById("resetButton");
 
+// evaluate the number of tokens
+function evaluateInput(input) {
+    const tokens = input.trim().split(/\s+/);
+
+    if (tokens.length < 3) return input;
+
+    let result = Number(tokens[0]);
+
+    for (let i = 1; i < tokens.length; i += 2) {
+        const operator = tokens[i];
+        const nextNumber = Number(tokens[i + i]);
+
+        result = operate(result, nextNumber, operator); 
+
+        if (result === "Error") return "Error"; 
+    }
+
+    return result; 
+}
+
 labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
@@ -20,7 +40,6 @@ labels.forEach(label => {
     button.addEventListener("click", () => {
         if (label === "=") {
             try {
-
                 const tokens = displayField.value.trim().split(" ");
                 if (tokens.length === 3) {
                     const [n1, operator, n2] = tokens;
