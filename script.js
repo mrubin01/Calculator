@@ -16,12 +16,20 @@ labels.forEach(label => {
     button.textContent = label;
     button.style.aspectRatio = "1/1";
 
-    // listener: to be implemented
+    // button listener
     button.addEventListener("click", () => {
         if (label === "=") {
             try {
-                // displayField.value = math.evaluate(displayField); 
 
+                const tokens = displayField.value.trim().split(" ");
+                if (tokens.length === 3) {
+                    const [n1, operator, n2] = tokens;
+                    const result = operate(Number(n1), Number(n2), operator);      
+                    displayField.value = result;
+                } else {
+                    displayField.value = "Error";
+                }
+                
             } catch {
                 displayField.value = "Error"; 
             }
@@ -62,7 +70,7 @@ function operate(n1, n2, operator) {
     }
 }
 
-// add listener for the reset button
+// listener for the reset button
 resetButton.addEventListener("click", () => {
   displayField.value = "";
 });
