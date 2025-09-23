@@ -39,19 +39,7 @@ labels.forEach(label => {
     // button listener
     button.addEventListener("click", () => {
         if (label === "=") {
-            try {
-                const tokens = displayField.value.trim().split(" ");
-                if (tokens.length === 3) {
-                    const [n1, operator, n2] = tokens;
-                    const result = operate(Number(n1), Number(n2), operator);      
-                    displayField.value = result;
-                } else {
-                    displayField.value = "Error";
-                }
-                
-            } catch {
-                displayField.value = "Error"; 
-            }
+            displayField.value = evaluateInput(displayField.value);
         } else if (["+", "-", "*", "/"].includes(label)) {
             displayField.value += ` ${label} `; 
         } else {
