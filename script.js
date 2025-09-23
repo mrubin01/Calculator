@@ -63,5 +63,5 @@ function operate(n1, n2, operator) {
 
 // add listener for the reset button
 resetButton.addEventListener("click", () => {
-  resultField.value = "";
+  resultField.value = "OK";
 });
