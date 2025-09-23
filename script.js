@@ -10,10 +10,6 @@ const container = document.getElementById("buttonContainer");
 const displayF = document.getElementById("displayField");
 const resetB = document.getElementById("resetButton");
 
-// add listener for the reset button
-resetB.addEventListener("click", () => {
-    displayF.textContent = "";
-})
 
 labels.forEach(label => {
     const button = document.createElement("button");
@@ -66,6 +62,7 @@ function operate(n1, n2, operator) {
     }
 }
 
+// add listener for the reset button
 resetBtn.addEventListener("click", () => {
   resultField.value = "";
 });
