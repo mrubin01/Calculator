@@ -20,7 +20,8 @@ labels.forEach(label => {
     button.addEventListener("click", () => {
         if (label === "=") {
             try {
-                displayField.value = math.evaluate(displayField); 
+                // displayField.value = math.evaluate(displayField); 
+
             } catch {
                 displayField.value = "Error"; 
             }
@@ -46,7 +47,7 @@ function multiply(n1, n2) {
 }
 
 function divide(n1, n2) {
-    return n1 / n2;
+    return n2 !== 0 ? n1 / n2 : "Error";
 }
 
 function operate(n1, n2, operator) {
@@ -63,5 +64,5 @@ function operate(n1, n2, operator) {
 
 // add listener for the reset button
 resetButton.addEventListener("click", () => {
-  resultField.value = "OK";
+  displayField.value = "";
 });
