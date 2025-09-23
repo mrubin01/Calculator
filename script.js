@@ -3,7 +3,8 @@ const labels = [
     "4", "5", "6",
     "7", "8", "9",
     "0", ".", "+",
-    "-", "*", "/", "="
+    "-", "*", "/", 
+    "=", "C"
 ];
 
 const container = document.getElementById("buttonContainer");
