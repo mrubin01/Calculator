@@ -10,6 +10,12 @@ const container = document.getElementById("buttonContainer");
 const displayField = document.getElementById("displayField");
 const resetButton = document.getElementById("resetButton");
 
+// round result
+function roundResult(n) {
+    if (n === "Error") return "Error";
+    return Number.isInteger(n) ? n : Number(n.toFixed(2)); 
+}
+
 // evaluate the number of tokens
 function evaluateInput(input) {
     const tokens = input.trim().split(/\s+/);
