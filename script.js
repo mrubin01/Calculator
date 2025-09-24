@@ -42,7 +42,7 @@ function evaluateInput(input) {
 // track last action
 let lastAction = null;
 
-// add digit numbers
+// add digit buttons
 labels.forEach(label => {
     const button = document.createElement("button");
     button.className = "btn";
@@ -51,22 +51,23 @@ labels.forEach(label => {
 
     // button listener
     button.addEventListener("click", () => {
-        if (label === "=") {
-            const value = evaluateInput(displayField.value);
-            displayField.value = value === "" ? "" : String(value);
-            lastAction = 'equals';
-            return;
+      // click on =
+      if (label === "=") {
+        const value = evaluateInput(displayField.value);
+        displayField.value = value === "" ? "" : String(value);
+        lastAction = 'equals';
+        return;
       }
 
-      // operators
+      // click on operators
       if (["+", "-", "*", "/"].includes(label)) {
         // If user clicks operator repeatedly, replace the previous operator
         if (lastAction === 'operator') {
-          // remove last " <op> " (3 chars) and add the new one
+          // remove last " op " (3 chars) and add the new one
           displayField.value = displayField.value.slice(0, -3) + ` ${label} `;
         } else if (lastAction === 'equals' || lastAction === 'digit' || lastAction === null) {
           // If last was equals, we want to continue from the result; just append operator
-          // (If resultField is empty and operator is pressed, do nothing)
+          // If resultField is empty and operator is pressed, do nothing
           if (displayField.value.trim() !== "") {
             displayField.value = `${displayField.value} ${label} `;
           }
@@ -75,14 +76,14 @@ labels.forEach(label => {
         return;
       }
 
-      // dot
+      // click on dot
       if (label === ".") {
         const parts = displayField.value.trim().split(/\s+/);
         const currentNumber = parts[parts.length - 1] || "";
         if (currentNumber.includes(".")) return;
       }
 
-      // backspace
+      // click on backspace
       if (label === "C") {
         const value = displayField.value; 
         if (value.endsWith(" ")) {
@@ -103,7 +104,7 @@ labels.forEach(label => {
         return; 
       }
 
-      // If last action was 'equals' and user didn't press an operator in between,
+      // If last action was equals and user didnt press an operator in between,
       // start a fresh number (replace the displayed result).
       if (lastAction === 'equals') {
         displayField.value = label; // start new number
